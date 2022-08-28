@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+
+{% block title %}Data demo - Login{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Login</h1>
+</div>
+<div class="col-md-4">
+    <form method="POST", enctype="multipart/form-data", class="form-group">
+        {{ form.csrf_token }}
+        {{ form.email.label }}</br>
+        {{ form.email }} </br>
+        {{ form.password.label }}</br>
+        {{ form.password }} </br>
+        {{ form.remember_me.label }}
+        {{ form.remember_me }}</br>
+        {{ form.submit }}
+    </form>
+
+    <br>
+
+</div>
+{% endblock %}

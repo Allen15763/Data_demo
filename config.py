@@ -1,5 +1,7 @@
 import os
+import urllib
 basedir = os.path.abspath(os.path.dirname(__file__))
+params = urllib.parse.quote_plus('DRIVER={SQL Server};SERVER=DESKTOP-JSI96RP;DATABASE=Dev_Data_demo;Trusted_Connection=yes;')
 
 
 class Config:
@@ -26,8 +28,7 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
+    SQLALCHEMY_DATABASE_URI = "mssql+pyodbc:///?odbc_connect=%s" % params
 
 
 class TestingConfig(Config):
@@ -38,8 +39,7 @@ class TestingConfig(Config):
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+    SQLALCHEMY_DATABASE_URI = "mssql+pyodbc:///?odbc_connect=%s" % params
 
     @classmethod
     def init_app(cls, app):
